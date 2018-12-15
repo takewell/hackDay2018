@@ -34,12 +34,11 @@ export default class HomeScreen extends React.Component {
         <View style={{
           height: 350,
           backgroundColor: Color.darkorange,
-          // flexDirection: 'column',
+          flexDirection: 'column',
           justifyContent: 'space-around',
           alignItems: 'center',
         }}>
-
-
+          <Text> <Text style={{ color: '#fff' }}>ダイエット指数</Text> <Text style={{ fontSize: 60, color: '#fff' }}>20</Text></Text>
           {/* <FadeAnim style={{ marginBottom: 100, alignItems: 'center', width: 250, height: 50 }}>
             <ProgressCirCle></ProgressCirCle>
           </FadeAnim> */}

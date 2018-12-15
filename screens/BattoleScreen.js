@@ -68,7 +68,6 @@ export default class BattoleScreen extends React.Component {
           </Right>
         </Header>
         <View style={{ flex: 1 }} >
-          {/* 5秒くらいかけて結果をだす view を実装する */}
           <View style={{
             height: 350,
             backgroundColor: Color.darkorange,
@@ -77,7 +76,7 @@ export default class BattoleScreen extends React.Component {
             alignItems: 'center',
           }}>
             <FadeAnim>
-              <Text style={{ fontSize: 60, color: '#fff' }}>{this.state.resultText}</Text>
+              <Text style={{ fontSize: 120, color: '#fff' }}>{this.state.resultText}</Text>
             </FadeAnim>
           </View>
         </View>
