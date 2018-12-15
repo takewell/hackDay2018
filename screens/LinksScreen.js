@@ -11,8 +11,7 @@ export default class LinksScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      foods: [],
-      hoge: 0
+      foods: []
     }
   }
 
@@ -24,17 +23,15 @@ export default class LinksScreen extends React.Component {
       console.log('foods', json.foods);
       this.setState({ foods: json.foods });
     });
-    this.setState({ hoge: 1 });
-    console.log(this.state.hoge);
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
         <Content>
-          {this.state.foods.map((food) => {
+          {this.state.foods.map((food, i) => {
             return (
-              <Card>
+              <Card key={'key' + i}>
                 <CardItem>
                   <Left>
                     <Body>
