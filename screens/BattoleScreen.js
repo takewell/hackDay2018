@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Text, Title } from 'native-base';
+import FadeAnim from '../components/FadeAnim';
 import Color from '../constants/Colors';
 
 
@@ -11,12 +12,34 @@ export default class BattoleScreen extends React.Component {
   constructor(props) {
     super(props);
     // this.fetchFood = new fetchAPI('/api/v1/food');
+    this.state = {
+      time: 0,
+      intervalId: null,
+      resultText: '敗北'
+    }
   }
 
   componentDidMount() {
-    fetch('http://52.194.184.95/api/v1/foods').then(res => {
-      console.log(res);
-    })
+    // fetch('http://52.194.184.95/api/v1/foods').then(res => {
+    //   return res.json();
+    // }).then(e => {
+    //   console.log(e);
+    // })
+    let isWin = true;
+    this.start();
+    setTimeout(() => {
+      clearInterval(this.state.intervalId);
+      this.setState({ resultText: isWin ? '勝利' : '敗北' })
+    }, 1000 * 3);
+  }
+
+  start = () => {
+    let result;
+    this.state.intervalId = setInterval(() => {
+      this.time += 50;
+      result = result === '勝利' ? '敗北' : '勝利';
+      this.setState({ resultText: result });
+    }, 50);
   }
 
   onBack = () => {
@@ -40,6 +63,7 @@ export default class BattoleScreen extends React.Component {
           </Right>
         </Header>
         <View style={{ flex: 1 }} >
+          {/* 5秒くらいかけて結果をだす view を実装する */}
           <View style={{
             height: 350,
             backgroundColor: Color.darkorange,
@@ -47,7 +71,9 @@ export default class BattoleScreen extends React.Component {
             justifyContent: 'space-around',
             alignItems: 'center',
           }}>
-            <Text style={{ fontSize: 60, color: '#fff' }}>敗北</Text>
+            <FadeAnim>
+              <Text style={{ fontSize: 60, color: '#fff' }}>{this.state.resultText}</Text>
+            </FadeAnim>
           </View>
         </View>
       </Container>
