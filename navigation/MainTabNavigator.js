@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
@@ -25,7 +26,7 @@ const LinksStack = createStackNavigator({
 });
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'メシ',
+  tabBarLabel: '飯テロ通知',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       name={Platform.OS === 'ios' ? `${focused ? 'alert' : 'alert-outline'}` : ''}
@@ -45,6 +46,7 @@ SettingsStack.navigationOptions = {
     />
   ),
 };
+
 
 export default createBottomTabNavigator({
   HomeStack,

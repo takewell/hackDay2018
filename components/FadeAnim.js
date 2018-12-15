@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated } from 'react-native';
 
-export class MainVisual extends React.Component {
+export default class FadeAnim extends React.Component {
   state = {
     fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
   }
@@ -11,7 +11,7 @@ export class MainVisual extends React.Component {
       this.state.fadeAnim,            // The animated value to drive
       {
         toValue: 1,                   // Animate to opacity: 1 (opaque)
-        duration: 1000 * 3,              // Make it take a while
+        duration: 1000 * 5,              // Make it take a while
       }
     ).start();                        // Starts the animation
   }

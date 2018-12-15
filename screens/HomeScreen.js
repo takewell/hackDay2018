@@ -1,26 +1,36 @@
 import React from 'react';
 import {
-  Image,
   Platform,
-  ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
-import { MainVisual } from '../components/MainVisual';
+import { Container, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
+import FadeAnim from '../components/FadeAnim';
 import ProgressCirCle from '../components/Progres';
-import { MonoText } from '../components/StyledText';
 import Color from '../constants/Colors';
+import BattoleScreen from './BattoleScreen';
+
+// export const BattoleStack = createStackNavigator({
+//   Battole: BattoleScreen,
+// });
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  componentDidMount() {
+    console.log('state', this.state);
+  }
+
+  transBattle = () => {
+    console.log('navigate', this.props.navigation.navigate);
+    this.props.navigation.navigate('Battole');
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
         <View style={{
           height: 350,
           backgroundColor: Color.darkorange,
@@ -28,29 +38,81 @@ export default class HomeScreen extends React.Component {
           justifyContent: 'space-around',
           alignItems: 'center',
         }}>
-          <MainVisual style={{ marginBottom: 100, alignItems: 'center', width: 250, height: 50 }}>
-            <Text>hoge</Text>
+
+
+          {/* <FadeAnim style={{ marginBottom: 100, alignItems: 'center', width: 250, height: 50 }}>
             <ProgressCirCle></ProgressCirCle>
-          </MainVisual>
-
+          </FadeAnim> */}
         </View>
-
-        <MainVisual style={{ width: 250, height: 50, backgroundColor: 'powderblue' }}>
-          <Text style={{ fontSize: 28, textAlign: 'center', margin: 10 }}>Fading in</Text>
-        </MainVisual>
-
-        {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-        </ScrollView> */}
-
-        {/* <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View> */}
-
+        <Container>
+          <Content>
+            <List>
+              <ListItem thumbnail onPress={this.transBattle}>
+                <Left>
+                  <Thumbnail square source={require('../assets/images/battole.png')} />
+                </Left>
+                <Body>
+                  <Text>あなたの飯テロバトル戦績</Text>
+                  <Text note numberOfLines={1}>12月 15 日 午後 16:00</Text>
+                </Body>
+                <Right>
+                  <Text>
+                    <Text style={{ fontSize: 26 }}>200</Text>
+                    <Text> point</Text>
+                  </Text>
+                </Right>
+              </ListItem>
+              <View style={{ backgroundColor: '#f0f0f0', height: 7 }}></View >
+              <ListItem thumbnail>
+                <Left>
+                  <Thumbnail square source={require('../assets/images/food-apple.png')} />
+                </Left>
+                <Body>
+                  <Text>食べ物</Text>
+                  <Text note numberOfLines={1}>12月 15 日 午後 16:00</Text>
+                </Body>
+                <Right>
+                  <Text>
+                    <Text style={{ fontSize: 26 }}>300</Text>
+                    <Text> kcal</Text>
+                  </Text>
+                </Right>
+              </ListItem>
+              <View style={{ backgroundColor: '#f0f0f0', height: 7 }}></View >
+              <ListItem thumbnail>
+                <Left>
+                  <Thumbnail square source={require('../assets/images/running.png')} />
+                </Left>
+                <Body>
+                  <Text>運動</Text>
+                  <Text note numberOfLines={1}>12月 15 日 午後 16:00</Text>
+                </Body>
+                <Right>
+                  <Text>
+                    <Text style={{ fontSize: 26 }}>200</Text>
+                    <Text> kcal</Text>
+                  </Text>
+                </Right>
+              </ListItem>
+              <View style={{ backgroundColor: '#f0f0f0', height: 7 }}></View >
+              <ListItem thumbnail>
+                <Left>
+                  <Thumbnail square source={require('../assets/images/weight-solid.png')} />
+                </Left>
+                <Body>
+                  <Text>体重</Text>
+                  <Text note numberOfLines={1}>12月 15 日 午後 16:00</Text>
+                </Body>
+                <Right>
+                  <Text>
+                    <Text style={{ fontSize: 26 }}>60.0</Text>
+                    <Text> kg</Text>
+                  </Text>
+                </Right>
+              </ListItem>
+            </List>
+          </Content>
+        </Container>
       </View >
     );
   }
@@ -77,16 +139,6 @@ export default class HomeScreen extends React.Component {
       );
     }
   }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({

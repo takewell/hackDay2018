@@ -1,22 +1,54 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Image } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { ExpoLinksView } from '@expo/samples';
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
-    title: 'Links',
+    title: '飯テロ通知',
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      foods: [],
+      hoge: 0
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.state);
+    fetch('http://52.194.184.95/api/v1/foods').then(res => {
+      return res.json();
+    }).then(json => {
+      console.log('foods', json.foods);
+      this.setState({ foods: json.foods });
+    });
+    this.setState({ hoge: 1 });
+    console.log(this.state.hoge);
+  }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Image
-          style={{ width: 300, height: 300 }}
-          source={{ uri: 'https://s3-ap-northeast-1.amazonaws.com/meshitero/photo/%E3%82%AA%E3%83%A0%E3%83%A9%E3%82%A4%E3%82%B9.jpeg' }}
-        />
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+        <Content>
+          {this.state.foods.map((food) => {
+            return (
+              <Card>
+                <CardItem>
+                  <Left>
+                    <Body>
+                      <Text>{food.Name}</Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image source={{ uri: food.image_url }} style={{ height: 200, width: null, flex: 1 }} />
+                </CardItem>
+              </Card>
+            )
+          })}
+        </Content>
       </ScrollView>
     );
   }
