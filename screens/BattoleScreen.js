@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Text, Title } from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Text, Title, Content } from 'native-base';
 import FadeAnim from '../components/FadeAnim';
 import Color from '../constants/Colors';
 
@@ -15,7 +15,8 @@ export default class BattoleScreen extends React.Component {
     this.state = {
       time: 0,
       intervalId: null,
-      resultText: '敗北'
+      resultText: '敗北',
+      text: null
     }
   }
 
@@ -30,6 +31,10 @@ export default class BattoleScreen extends React.Component {
     setTimeout(() => {
       clearInterval(this.state.intervalId);
       this.setState({ resultText: isWin ? '勝利' : '敗北' })
+      const winText = 'あなたは闘争に勝利しました。飯テロ画像を他人に投下して、ポイントを下げましょう。'
+      const loseText = 'あなたは闘争に敗北しました。飯テロ画像が投下されポイントを下げられる可能性があります。観念して飯を食べまくるか、運動して飯テロ攻撃で仕返ししましょう。'
+      const text = isWin ? winText : loseText;
+      this.setState({ text: text });
     }, 1000 * 3);
   }
 
@@ -76,6 +81,7 @@ export default class BattoleScreen extends React.Component {
             </FadeAnim>
           </View>
         </View>
+        {<Content><Text style={{ fontSize: 40 }}>{this.state.text}</Text></Content>}
       </Container>
     )
   }
