@@ -9,58 +9,49 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-
+import { MainVisual } from '../components/MainVisual';
+import ProgressCirCle from '../components/Progres';
 import { MonoText } from '../components/StyledText';
+import Color from '../constants/Colors';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+        <View style={{
+          height: 350,
+          backgroundColor: Color.darkorange,
+          // flexDirection: 'column',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}>
+          <MainVisual style={{ marginBottom: 100, alignItems: 'center', width: 250, height: 50 }}>
+            <Text>hoge</Text>
+            <ProgressCirCle></ProgressCirCle>
+          </MainVisual>
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
+        </View>
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+        <MainVisual style={{ width: 250, height: 50, backgroundColor: 'powderblue' }}>
+          <Text style={{ fontSize: 28, textAlign: 'center', margin: 10 }}>Fading in</Text>
+        </MainVisual>
 
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
+        {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
+        </ScrollView> */}
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
+        {/* <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
 
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
             <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
           </View>
-        </View>
-      </View>
+        </View> */}
+
+      </View >
     );
   }
 
@@ -120,7 +111,7 @@ const styles = StyleSheet.create({
   },
   welcomeImage: {
     width: 100,
-    height: 80,
+    height: 100,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
