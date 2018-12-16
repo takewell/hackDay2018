@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, StyleSheet } from 'react-native';
-import { Container, Header, Content, ListItem, Icon, Form, Item, Picker, Text, Title, Body, Left, Right, Button } from 'native-base';
+import { Icon, Form, Item, Picker, Text, Button } from 'native-base';
 
 export default class AddMotionScreen extends Component {
-  static navigationOptions = {
-    header: null,
-  };
-
   constructor(props) {
     super(props)
     this.state = {
@@ -19,30 +15,25 @@ export default class AddMotionScreen extends Component {
     fetch("http://52.194.184.95/api/v1/motions").then(res => {
       return res.json()
     }).then(json => {
-      console.log('motion return json', json);
       this.setState({ motions: json.motions });
     });
   }
 
-  AddMotion = () => {
-    AsyncStorage.getItem('apiToken').then(res => {
-      console.log('apitoken res', res);
-      apiToken = res;
-
-      fetch("http://52.194.184.95/api/v1/diet_datas/motions", {
-        method: 'POST',
-        headers: {
-          "Authorization": apiToken,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ id: this.state.selectedId })
-      }).then(res => {
-        return res.json()
-      }).then(json => {
-        this.props.navigation.navigate('Main')
-      });
-
-    });
+  AddMotion = async () => {
+    let apiToken = await AsyncStorage.getItem('apiToken')
+    fetch("http://52.194.184.95/api/v1/diet_datas/motions", {
+      method: "POST",
+      headers: {
+        "Authorization": apiToken,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({id: this.state.selectedId})
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      console.log(res)
+      this.props.navigation.navigate("Main")
+    })
   }
 
   onBack = () => {
@@ -58,17 +49,18 @@ export default class AddMotionScreen extends Component {
             <Picker
               mode="dropdown"
               iosIcon={<Icon name="ios-arrow-dropdown" />}
-              placeholder="運動を選ぶ"
+              placeholder="Select motion"
+              style={{ width: undefined }}
               selectedValue={this.state.selectedId}
-              onValueChange={(value) => this.setState({ selectedId: Number(value) })}
+              onValueChange={(value) => this.setState({selectedId: Number(value)})}
             >
-              {
-                this.state.motions.map((motion, i) => {
-                  return (
-                    <Picker.Item key={i} label={motion.Name} value={motion.ID} />
-                  )
-                })
-              }
+            {
+              this.state.motions.map((motion, i) => {
+                return (
+                  <Picker.Item key={i} label={motion.name} value={motion.ID} />
+                )
+              })
+            }
             </Picker>
           </Item>
         </Form>
