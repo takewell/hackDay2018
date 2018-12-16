@@ -11,7 +11,7 @@ export default class AddMotionScreen extends Component {
     super(props)
     this.state = {
       motions: [],
-      name: null
+      selectedId: 0
     }
   }
 
@@ -29,18 +29,17 @@ export default class AddMotionScreen extends Component {
       console.log('apitoken res', res);
       apiToken = res;
 
-      fetch("http://52.194.184.95/api/v1/motions", {
+      fetch("http://52.194.184.95/api/v1/diet_datas/motions", {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": apiToken
+          "Authorization": apiToken,
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(this.state)
+        body: JSON.stringify({ id: this.state.selectedId })
       }).then(res => {
         return res.json()
       }).then(json => {
-        console.log('motion return json', json);
-        this.setState({ motions: json.motions });
+        this.props.navigation.navigate('Main')
       });
 
     });
@@ -53,44 +52,30 @@ export default class AddMotionScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Header >
-          <Left>
-            <Button transparent onPress={this.onBack}>
-              <Text>戻る</Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title>運動の選択</Title>
-          </Body>
-          <Right>
-          </Right>
-        </Header>
-        <View styles={styles.container}>
-          <Form>
-            <Item picker>
-              <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="ios-arrow-dropdown" />}
-                placeholder="運動を選ぶ"
-                selectedValue={this.state.selectedId}
-                onValueChange={(value) => this.setState({ selectedId: Number(value) })}
-              >
-                {
-                  this.state.motions.map((motion, i) => {
-                    return (
-                      <Picker.Item label={motion.Name} value={motion.ID} />
-                    )
-                  })
-                }
-              </Picker>
-            </Item>
-          </Form>
-          <Button block onPress={this.AddMotion}>
-            <Text>運動を記録する</Text>
-          </Button>
-        </View>
-      </View>
+      <View styles={styles.container}>
+        <Form>
+          <Item picker>
+            <Picker
+              mode="dropdown"
+              iosIcon={<Icon name="ios-arrow-dropdown" />}
+              placeholder="運動を選ぶ"
+              selectedValue={this.state.selectedId}
+              onValueChange={(value) => this.setState({ selectedId: Number(value) })}
+            >
+              {
+                this.state.motions.map((motion, i) => {
+                  return (
+                    <Picker.Item key={i} label={motion.Name} value={motion.ID} />
+                  )
+                })
+              }
+            </Picker>
+          </Item>
+        </Form>
+        <Button block onPress={this.AddMotion}>
+          <Text>運動を記録する</Text>
+        </Button>
+      </View >
     );
   }
 }
