@@ -40,6 +40,11 @@ export default class HomeScreen extends React.Component {
 
   transAddMotion = () => {
     this.props.navigation.navigate('AddMotion');
+
+  }
+
+  transFoodForm = () => {
+    this.props.navigation.navigate('FoodForm');
   }
 
   render() {
@@ -76,7 +81,7 @@ export default class HomeScreen extends React.Component {
                 </Right>
               </ListItem>
               <View style={{ backgroundColor: '#f0f0f0', height: 7 }}></View >
-              <ListItem thumbnail>
+              <ListItem thumbnail onPress={this.transFoodForm}>
                 <Left>
                   <Thumbnail square source={require('../assets/images/food-apple.png')} />
                 </Left>

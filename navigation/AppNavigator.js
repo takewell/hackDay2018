@@ -7,6 +7,7 @@ import AuthStack from './SignInNavigator';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import SignUpStack from './SignUpNavigator';
 import AddMotionStack from './AddMotion';
+import FoodFormStack from './FoodFormNavigator';
 
 
 export default createSwitchNavigator({
@@ -17,7 +18,8 @@ export default createSwitchNavigator({
   Auth: AuthStack,
   AuthLoading: AuthLoadingScreen,
   SignUp: SignUpStack,
-  addMotion: AddMotionStack
+  addMotion: AddMotionStack,
+  FoodForm: FoodFormStack
 }, {
     initialRouteName: 'AuthLoading'
   });
