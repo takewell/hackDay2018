@@ -38,6 +38,10 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate('Battole');
   }
 
+  transAddMotion = () => {
+    this.props.navigation.navigate('AddMotion');
+  }
+
   render() {
     return (
       <View style={styles.container} >
@@ -88,11 +92,11 @@ export default class HomeScreen extends React.Component {
                 </Right>
               </ListItem>
               <View style={{ backgroundColor: '#f0f0f0', height: 7 }}></View >
-              <ListItem thumbnail>
+              <ListItem thumbnail onPress={this.transAddMotion}>
                 <Left>
                   <Thumbnail square source={require('../assets/images/running.png')} />
                 </Left>
-                <Body>
+                <Body >
                   <Text>運動</Text>
                   <Text note numberOfLines={1}>12月 15 日 午後 16:00</Text>
                 </Body>

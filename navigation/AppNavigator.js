@@ -6,6 +6,7 @@ import BattoleNavigator from './BattoleNavigator';
 import AuthStack from './SignInNavigator';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import SignUpStack from './SignUpNavigator';
+import AddMotionStack from './AddMotion';
 
 
 export default createSwitchNavigator({
@@ -15,7 +16,8 @@ export default createSwitchNavigator({
   Battole: BattoleNavigator,
   Auth: AuthStack,
   AuthLoading: AuthLoadingScreen,
-  SignUp: SignUpStack
-},{
-  initialRouteName: 'AuthLoading'
-});
+  SignUp: SignUpStack,
+  addMotion: AddMotionStack
+}, {
+    initialRouteName: 'AuthLoading'
+  });
