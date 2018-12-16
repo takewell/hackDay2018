@@ -20,7 +20,17 @@ export default class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
-    console.log('state', this.state);
+    let users;
+    fetch("http://52.194.184.95/api/v1/users", {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    }).then(res => {
+      return res.json()
+    }).then(json => {
+      users = json;
+      console.log('user', users);
+    })
   }
 
   transBattle = () => {
