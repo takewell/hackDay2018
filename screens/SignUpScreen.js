@@ -54,7 +54,7 @@ export default class SignUpScreen extends Component {
             <Item picker>
               <Picker
                 mode="dropdown"
-                iosIcon={<Icon name="ios-arrow-dropup" />}
+                iosIcon={<Icon name="ios-arrow-dropdown" />}
                 style={{ width: undefined }}
                 placeholder="Sex"
                 onValueChange={(value) => this.setState({sex: value})}
